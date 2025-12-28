@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Do you love Renan Shio? 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffc0cb; /* soft pink background */
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      color: #ff4d6d;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 1.5em;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      margin: 10px;
+      cursor: pointer;
+      transition: font-size 0.2s;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no, #confirmMessage {
+      background: #ddd;
+      color: black;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: float 5s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-600px) rotate(360deg); opacity: 0; }
+    }
+
+    #confirmBox {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box" id="mainBox">
+    <h1>Do you love Renan Shio? 💖</h1>
+    <button id="yes">Yes 💕</button>
+    <button id="no">No 🙃</button>
+    <div id="confirmBox"></div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const confirmBox = document.getElementById("confirmBox");
+    const body = document.body;
+
+    let yesSize = 1.5; // initial font size in em
+    const confirmationMessages = [
+      "Are you sure? 😮",
+      "Really? Think again! 🤔",
+      "Hmm… Do you really mean it? 🙃",
+      "No way! Are you positive? 😳",
+      "Come on… Really sure? 😏"
+    ];
+
+    function createHearts(count = 20) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerText = '💖';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.fontSize = Math.random() * 30 + 15 + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        body.appendChild(heart);
+      }
+    }
+
+    function celebrate() {
+      body.innerHTML = `
+        <div style="
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          height:100vh;
+          background: #ffc0cb;
+          font-family: Arial, sans-serif;
+          text-align:center;
+          overflow:hidden;
+        ">
+          <h1>YAYYYY! 💕🥰</h1>
+          <h2>Renan Shio loves you! 💖</h2>
+        </div>
+      `;
+      createHearts(30);
+    }
+
+    yesBtn.addEventListener("click", celebrate);
+
+    noBtn.addEventListener("click", () => {
+      yesSize += 0.5; // Yes grows every time No is clicked
+      yesBtn.style.fontSize = yesSize + "em";
+
+      // Show random confirmation message
+      const index = Math.floor(Math.random() * confirmationMessages.length);
+      confirmBox.textContent = confirmationMessages[index];
+    });
+  </script>
+
+</body>
+</html>
